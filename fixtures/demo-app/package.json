@@ -1,0 +1,7 @@
+{
+  "name": "clarion-demo-app",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A small TypeScript app used as the Clarion demo fixture",
+  "private": true
+}

@@ -1,0 +1,10 @@
+{
+  "version": "1",
+  "agents": {
+    "demo-agent-001": {
+      "kind": "ai_agent",
+      "platform": "local_cli",
+      "capabilities": ["code_review", "bug_fix"]
+    }
+  }
+}

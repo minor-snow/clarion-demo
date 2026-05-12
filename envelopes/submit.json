@@ -1,0 +1,10 @@
+{
+  "envelopeVersion": "1",
+  "type": "submission",
+  "agentId": "demo-agent-001",
+  "agentKind": "ai_agent",
+  "platform": "local_cli",
+  "intent": "Fix cross-module session validation in API routes",
+  "scope": ["src/api/routes.ts", "src/auth/session.ts"],
+  "workItemId": null
+}

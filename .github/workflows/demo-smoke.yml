@@ -1,0 +1,60 @@
+name: Demo Smoke
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Clarion
+        run: |
+          # Point to local build or install from registry
+          # For now, skip if not available
+          echo "CLARION_BIN not set — smoke will verify structure only"
+
+      - name: Verify demo structure
+        run: |
+          test -f README.md
+          test -f QUICKSTART.md
+          test -f POSITIONING.md
+          test -f docs/what-you-are-seeing.md
+          test -f docs/limitations.md
+          test -f fixtures/demo-app/package.json
+          test -f fixtures/demo-app/tsconfig.json
+          test -f fixtures/demo-app/src/auth/login.ts
+          test -f fixtures/demo-app/src/api/routes.ts
+          test -f fixtures/demo-app/src/billing/usage.ts
+          test -f envelopes/submit.json
+          test -f envelopes/progress.json
+          test -f envelopes/complete.json
+          test -f scripts/bootstrap.sh
+          test -f scripts/run-demo.sh
+          test -f scripts/reset-demo-state.sh
+          test -f expected/checkpoints.md
+          echo "✓ All demo files present"
+
+      - name: Verify no raw path leaks in docs
+        run: |
+          # Check that no absolute paths appear in documentation
+          if grep -r "H:\\\\Boom" docs/ README.md QUICKSTART.md 2>/dev/null; then
+            echo "ERROR: Absolute paths found in documentation"
+            exit 1
+          fi
+          echo "✓ No path leaks"
+
+      - name: Verify envelope JSON validity
+        run: |
+          node -e "JSON.parse(require('fs').readFileSync('envelopes/submit.json'))"
+          node -e "JSON.parse(require('fs').readFileSync('envelopes/progress.json'))"
+          node -e "JSON.parse(require('fs').readFileSync('envelopes/complete.json'))"
+          echo "✓ All envelopes are valid JSON"
