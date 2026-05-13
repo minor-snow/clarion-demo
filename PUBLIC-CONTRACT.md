@@ -71,7 +71,9 @@ The trust-bite fixture uses the current public compatibility shape:
   "protected": [],
   "review_required": [],
   "generated": [],
-  "path_roles": {}
+  "path_roles": {
+    "<path-or-glob>": "<role-label>"
+  }
 }
 ```
 

@@ -10,5 +10,9 @@
     "pantheon.alpha.json"
   ],
   "generated": [],
-  "path_roles": {}
+  "path_roles": {
+    "src/policy_engine.py": "deterministic_governance_core",
+    "src/app.py": "application_logic",
+    "tests/**": "test_surface"
+  }
 }
