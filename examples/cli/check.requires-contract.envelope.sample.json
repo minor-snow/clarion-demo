@@ -1,0 +1,48 @@
+{
+  "schema_version": "pantheon_cli_result@0.1.0",
+  "command": "pantheon check",
+  "target_type": "contract_gate",
+  "status": "failed",
+  "error_code": "missing_contract",
+  "summary": {
+    "risk_level": "critical",
+    "contract_status": "missing",
+    "reason_kinds": [
+      "missing_contract"
+    ]
+  },
+  "verdict": "requires_contract",
+  "findings": [
+    {
+      "kind": "missing_contract",
+      "severity": "blocking",
+      "message": "critical-risk changes detected without a valid contract."
+    }
+  ],
+  "next_actions": [
+    "Run: pantheon-alpha change infer --from-diff",
+    "Run: pantheon-alpha change plan --change-id <id>",
+    "Re-run Pantheon check.",
+    "Or request trusted maintainer approval."
+  ],
+  "next_action_intents": [],
+  "artifact_paths": [],
+  "warnings": [],
+  "errors": [
+    {
+      "code": "missing_contract",
+      "message": "critical-risk changes detected without a valid contract."
+    }
+  ],
+  "privacy": {
+    "disclosure": "full-local",
+    "note": "Detailed findings remain local unless you opt into GitHub disclosure."
+  },
+  "details": {
+    "risk_level": "critical",
+    "contract_status": "missing",
+    "reason_kinds": [
+      "missing_contract"
+    ]
+  }
+}

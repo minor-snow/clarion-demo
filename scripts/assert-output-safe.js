@@ -25,7 +25,7 @@ const checks = [
   },
   {
     label: "absolute_unix_path",
-    patterns: [/\/Users\//g, /\/home\//g, /\/var\//g],
+    patterns: [/\/Users\//g, /\/home\//g, /\/var\//g, /\/tmp\//g, /\/mnt\/[A-Za-z]\//g],
   },
   {
     label: "raw_diff_hunk",

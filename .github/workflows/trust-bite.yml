@@ -45,6 +45,11 @@ jobs:
             exit 1
           fi
           echo "PASS: bite-report.md exists"
+          if [ ! -f artifacts/bite/result.json ]; then
+            echo "ERROR: result.json was not generated"
+            exit 1
+          fi
+          echo "PASS: result.json exists"
 
       - name: Check report is safe
         run: |

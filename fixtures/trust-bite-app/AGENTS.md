@@ -2,7 +2,9 @@
 
 ## Machine source
 
-`pantheon.json` and `pantheon.alpha.json` are the machine-readable policy source.
+`pantheon.json` is the compatibility machine source for this fixture.
+`pantheon.alpha.json` is a byte-equivalent mirror kept for current Clarion compatibility.
+CI checks that both files stay identical.
 This file is the human-readable projection.
 
 ## Protected files

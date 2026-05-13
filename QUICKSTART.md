@@ -1,4 +1,4 @@
-# Quickstart — See the Bite
+# Quickstart - See the Bite
 
 Get from zero to a governance enforcement demo in under 5 minutes.
 
@@ -24,15 +24,19 @@ cd clarion-demo
 ```
 
 3. Read the output. You will see:
-   - A protected policy file (`src/policy_engine.py`) was modified
-   - Clarion returned a **non-pass** governance result
-   - A report was generated at `artifacts/bite/bite-report.md`
+- A protected policy file (`src/policy_engine.py`) was modified
+- Clarion returned a non-pass governance result
+- A sanitized report was generated at `artifacts/bite/bite-report.md`
+- A machine-readable envelope was generated at `artifacts/bite/result.json`
 
 ## What happened
 
-The demo applies a patch to a file marked as protected in `pantheon.json` and `pantheon.alpha.json`. Clarion evaluates the resulting diff and returns a governance result that is not `pass`.
+The demo applies a patch to a file marked as protected in `pantheon.json` and
+`pantheon.alpha.json`. Clarion evaluates the resulting diff and returns a
+governance result that is not `pass`.
 
-This proves the enforcement layer is active and deterministic.
+This proves the enforcement layer is active. The governance verdict is
+deterministic for the same input; the markdown report includes a timestamp.
 
 ## Next steps
 

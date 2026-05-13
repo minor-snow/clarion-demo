@@ -2,7 +2,7 @@
 
 ## What is `clarion trial`?
 
-`clarion trial` is a command suite that evaluates a repository's readiness for Clarion governance adoption. It runs non-destructively against your existing repo and produces a report.
+`clarion trial` is a command suite that evaluates a repository's readiness for Clarion governance adoption. It runs non-destructively against your existing repo and produces adoption signals.
 
 ## Trial subcommands
 
@@ -24,19 +24,14 @@ Analyzes repository structure:
 
 ### `trial pr`
 
-Evaluates recent pull request patterns:
-- Change frequency and size distribution
-- Review patterns
-- Files that change together
+Evaluates current or recent change patterns:
+- Governance-relevant paths in the diff
+- Review-sensitive files
 - Potential protected-file candidates
 
 ### `trial report`
 
-Generates the final adoption report at `.clarion-trial/clarion_trial_report.md` when the lane state is sufficient:
-- Summary of findings
-- Recommended governance rules
-- Adoption complexity estimate
-- Suggested next steps
+Generates the canonical adoption report at `.clarion-trial/clarion_trial_report.md` when the current lane state is sufficient.
 
 ### `trial bug` (optional)
 
@@ -45,10 +40,16 @@ Analyzes a specific bug scenario:
 - Which rules would have triggered?
 - What's the counterfactual?
 
-## Output format
+## Output format in this public demo
 
-All trial subcommands produce JSON envelopes on stdout. The report subcommand additionally writes the markdown report file when available. The public wrapper in this repo can synthesize a fallback bridge report from collected lane logs.
+This repo demonstrates Trial primarily as a human-readable adoption flow.
+
+Do not treat JSON envelopes as guaranteed for Trial lanes unless the shipped CLI
+actually emits them. The wrapper in this repo records lane logs under
+`.clarion-trial/trial-*.log` and may synthesize `.clarion-trial/bridge_report.md`
+when the canonical Trial report is unavailable.
 
 ## Safety
 
-Trial is read-only. It never modifies your source files. The only write is the `.clarion-trial/` output directory.
+Trial is read-only with respect to your source tree. The public wrapper writes
+only under `.clarion-trial/`.

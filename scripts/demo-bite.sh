@@ -13,6 +13,7 @@ CLARION="${CLARION_BIN:-clarion}"
 FIXTURE="$REPO_ROOT/fixtures/trust-bite-app"
 PATCH="$REPO_ROOT/scenarios/bite/patches/protected-policy-change.patch"
 ARTIFACTS_DIR="$REPO_ROOT/artifacts/bite"
+RESULT_JSON="$ARTIFACTS_DIR/result.json"
 
 if ! "$CLARION" --version >/dev/null 2>&1; then
   echo "ERROR: clarion binary is not runnable: $CLARION"
@@ -69,6 +70,7 @@ echo ""
 
 # --- Generate report ---
 mkdir -p "$ARTIFACTS_DIR"
+printf '%s\n' "$CHECK_OUTPUT" > "$RESULT_JSON"
 
 cat > "$ARTIFACTS_DIR/bite-report.md" << EOF
 # Bite Report
@@ -89,19 +91,17 @@ returned a real non-pass governance result for the resulting diff.
 - Exit code: $EXIT_CODE
 - Triggered file: \`src/policy_engine.py\`
 - Check mode: live worktree diff
-
-## Raw output
-
-\`\`\`
-$CHECK_OUTPUT
-\`\`\`
+- Machine-readable envelope: \`artifacts/bite/result.json\`
 
 ## Interpretation
 
 This proves that Clarion's governance enforcement is active. An unchecked change
 to a protected policy file is surfaced as a machine-readable non-pass result.
+The human-facing report is intentionally sanitized; the raw JSON envelope is kept
+as a local artifact instead of being embedded directly into this markdown file.
 EOF
 
 echo "6. Report written to: artifacts/bite/bite-report.md"
+echo "7. JSON written to: artifacts/bite/result.json"
 echo ""
 echo "=== Demo complete ==="

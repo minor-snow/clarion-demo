@@ -20,7 +20,9 @@ You will see a protected policy-file change produce a non-pass result.
 ./scripts/trial-on-repo.sh /path/to/your/repo
 ```
 
-This runs `clarion trial` and generates `.clarion-trial/clarion_trial_report.md`.
+This runs `clarion trial` and writes either:
+- `.clarion-trial/clarion_trial_report.md` when the canonical Trial report is produced
+- `.clarion-trial/bridge_report.md` when the wrapper has to fall back to collected lane logs
 
 ### 3. Inspect the public contract
 
@@ -34,7 +36,7 @@ Read:
 ## What this repo is
 
 - The first public-facing entrypoint for Clarion
-- A deterministic trust proof
+- A deterministic trust proof for governance verdicts
 - A guided bridge into `clarion trial`
 - A curated evidence index
 

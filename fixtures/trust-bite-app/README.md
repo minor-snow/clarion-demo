@@ -15,12 +15,13 @@ src/
 tests/
   test_policy_engine.py — Unit tests for the policy engine
 pantheon.json        — Governance configuration (version 1 schema)
+pantheon.alpha.json  — Byte-equivalent compatibility mirror of pantheon.json
 AGENTS.md            — Human-readable projection of the machine policy
 ```
 
 ## The protected file
 
-`src/policy_engine.py` is listed in both `pantheon.json` and `pantheon.alpha.json` under `protected`. Any unchecked modification to this file should cause `clarion check` to return a non-pass result.
+`src/policy_engine.py` is listed in both `pantheon.json` and `pantheon.alpha.json` under `protected`. In this fixture the two config files are intentionally byte-equivalent, and CI checks they stay in sync. Any unchecked modification to this file should cause `clarion check` to return a non-pass result.
 
 ## Running tests
 

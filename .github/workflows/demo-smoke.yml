@@ -48,6 +48,11 @@ jobs:
           fi
           echo "PASS: pantheon.json uses the current loader shape"
 
+      - name: Ensure mirror config stays byte-equivalent
+        run: |
+          cmp -s fixtures/trust-bite-app/pantheon.json fixtures/trust-bite-app/pantheon.alpha.json
+          echo "PASS: pantheon.alpha.json mirrors pantheon.json exactly"
+
       - name: Validate patch applies cleanly
         run: |
           WORK=$(mktemp -d)

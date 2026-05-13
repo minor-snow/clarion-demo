@@ -26,8 +26,22 @@ Run `clarion trial` against any repository to get an adoption report.
 1. **Doctor** — checks your repo meets minimum requirements
 2. **Scan** — analyzes repository structure and identifies governance surfaces
 3. **PR** — evaluates recent pull request patterns
-4. **Report** — attempts to generate `.clarion-trial/clarion_trial_report.md`
+4. **Report** — tries to produce the canonical Trial report
 5. **Bug** (optional) — if `--bug-title` is provided, runs a trial bug analysis
+
+## Output
+
+The wrapper uses `.clarion-trial/` inside the target repository:
+
+- Canonical report, when produced by Clarion CLI:
+  `.clarion-trial/clarion_trial_report.md`
+- Wrapper-owned fallback, when the canonical report is unavailable:
+  `.clarion-trial/bridge_report.md`
+- Lane logs:
+  `.clarion-trial/trial-*.log`
+
+If the canonical report is unavailable, the wrapper prints that explicitly and
+writes a bridge report instead. The bridge report is not a Clarion Trial report.
 
 ## Examples
 
@@ -48,20 +62,6 @@ Run `clarion trial` against any repository to get an adoption report.
 ```bash
 ./scripts/trial-on-repo.sh ~/projects/platform --bug-title "Race condition in queue worker"
 ```
-
-## Output
-
-The trial report is written to:
-
-```
-/path/to/your/repo/.clarion-trial/clarion_trial_report.md
-```
-
-See [docs/interpreting-trial-report.md](docs/interpreting-trial-report.md) for how to read the report.
-
-If the canonical `clarion trial report` output is unavailable for your repo state,
-the wrapper writes a fallback bridge report at the same path and stores step logs
-under `.clarion-trial/`.
 
 ## Troubleshooting
 

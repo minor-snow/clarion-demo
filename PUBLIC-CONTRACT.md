@@ -1,67 +1,98 @@
 # Public Contract
 
-This document defines the public surface of Clarion's CLI and its stability guarantees.
+This repository documents only the Clarion surfaces it can verify against the
+current shipped CLI. It must not invent a schema ahead of the product.
 
-## CLI Envelope Format
+## Current demonstrated machine-readable surface
 
-All Clarion CLI commands that produce structured output use a JSON envelope:
+The verified JSON surface in this repo is `clarion check --json`.
+
+The authoritative contract is the current CLI output itself. The sanitized
+samples under `examples/cli/` are derived from real command output and are
+included only as public-facing examples.
+
+Example current shape:
 
 ```json
 {
-  "version": "1.0",
-  "command": "<command-name>",
-  "timestamp": "<ISO-8601>",
-  "status": "pass | warn | fail | error",
-  "data": { ... },
-  "meta": {
-    "engine_version": "<semver>",
-    "repo": "<repo-root>"
-  }
+  "schema_version": "pantheon_cli_result@0.1.0",
+  "command": "pantheon check",
+  "target_type": "contract_gate",
+  "status": "ok | failed",
+  "summary": { "...": "..." },
+  "verdict": "pass | requires_contract | ...",
+  "findings": [],
+  "next_actions": [],
+  "next_action_intents": [],
+  "artifact_paths": [],
+  "warnings": [],
+  "errors": [],
+  "privacy": { "...": "..." },
+  "details": { "...": "..." }
 }
 ```
 
-### Envelope fields
+### Top-level fields currently evidenced
 
-| Field | Type | Stability |
-|-------|------|-----------|
-| `version` | string | Stable — breaking changes bump major |
-| `command` | string | Stable |
-| `timestamp` | ISO-8601 string | Stable |
-| `status` | enum | Stable — values will not be removed |
-| `data` | object | Semi-stable — additive changes only |
-| `meta` | object | Semi-stable — additive changes only |
+| Field | Meaning |
+|-------|---------|
+| `schema_version` | Identifies the current CLI envelope family |
+| `command` | Command that produced the envelope |
+| `target_type` | Evaluation surface targeted by the command |
+| `status` | High-level command outcome |
+| `summary` | Short structured summary |
+| `verdict` | Governance verdict |
+| `findings` | Structured findings |
+| `next_actions` | Human-readable next steps |
+| `next_action_intents` | Structured next-step intents when available |
+| `artifact_paths` | Local artifact references when available |
+| `warnings` | Non-blocking warnings |
+| `errors` | Blocking or command-level errors |
+| `privacy` | Disclosure boundary metadata |
+| `details` | Additional structured details |
 
-## Public surface stability
+## Trial surface in this repo
 
-The following are considered public surface and follow semver:
+`clarion trial` is demonstrated here as a human-readable adoption flow.
 
-- CLI command names (`check`, `trial doctor`, `trial scan`, `trial pr`, `trial report`, `trial bug`)
-- Envelope schema (top-level fields)
-- Exit codes (0 = pass, 1 = non-pass, 2 = error)
-- `pantheon.json` schema version 1
+This repo does not claim a stable JSON envelope for Trial lanes unless the
+shipped CLI actually emits one. The wrapper script in this repo,
+`scripts/trial-on-repo.sh`, is not the Clarion CLI. When the canonical
+`clarion trial report` output is unavailable, the wrapper writes
+`.clarion-trial/bridge_report.md`.
 
-The following are NOT public surface:
+## Fixture config compatibility
 
+The trust-bite fixture uses the current public compatibility shape:
+
+```json
+{
+  "version": 1,
+  "protected": [],
+  "review_required": [],
+  "generated": [],
+  "path_roles": {}
+}
+```
+
+In this fixture:
+- `pantheon.json` is the compatibility machine source
+- `pantheon.alpha.json` is a byte-equivalent mirror kept for compatibility
+- CI checks that the two files stay identical
+
+## Safety expectations for public samples
+
+Public samples in this repo must be sanitized:
+- No absolute local filesystem paths
+- No raw diff hunks in human-facing docs
+- No raw internal store dumps
+- No secret-like payloads
+
+## Not part of the public contract in this repo
+
+The following are explicitly not promised here:
 - Internal engine implementation details
 - `.pantheon/` directory structure
+- Wrapper-owned bridge report shape
 - Repair protocol internals
-- Agent gateway format
-
-## Safety boundaries
-
-Clarion enforces the following safety boundaries:
-
-1. **No code execution** — Clarion never executes repository code during checks
-2. **No network calls** — All checks are local and offline
-3. **No file mutation** — Clarion reads but never writes to your source files
-4. **Deterministic output** — Same input always produces same output
-5. **Bounded runtime** — Checks complete in bounded time proportional to repo size
-
-See [docs/safety-boundaries.md](docs/safety-boundaries.md) for details.
-
-## Versioning
-
-- This contract follows semver
-- Breaking changes require a major version bump
-- Additive changes (new fields, new commands) are minor version bumps
-- Bug fixes are patch bumps
+- Agent gateway internal formats

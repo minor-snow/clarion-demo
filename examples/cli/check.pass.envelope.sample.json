@@ -1,0 +1,37 @@
+{
+  "schema_version": "pantheon_cli_result@0.1.0",
+  "command": "pantheon check",
+  "target_type": "contract_gate",
+  "status": "ok",
+  "summary": {
+    "risk_level": "low",
+    "contract_status": "missing",
+    "reason_kinds": [
+      "base_policy_missing"
+    ]
+  },
+  "verdict": "pass",
+  "findings": [
+    {
+      "kind": "base_policy_missing",
+      "severity": "warning",
+      "message": "Base branch policy not found. Using conservative defaults."
+    }
+  ],
+  "next_actions": [],
+  "next_action_intents": [],
+  "artifact_paths": [],
+  "warnings": [],
+  "errors": [],
+  "privacy": {
+    "disclosure": "full-local",
+    "note": "Detailed findings remain local unless you opt into GitHub disclosure."
+  },
+  "details": {
+    "risk_level": "low",
+    "contract_status": "missing",
+    "reason_kinds": [
+      "base_policy_missing"
+    ]
+  }
+}
