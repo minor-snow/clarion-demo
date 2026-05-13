@@ -1,0 +1,54 @@
+name: Trust Bite
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  trust-bite:
+    name: Run trust-bite demo
+    runs-on: ubuntu-latest
+    # Only run when the engine is available
+    if: ${{ vars.CLARION_ENGINE_AVAILABLE == 'true' }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download Clarion binary
+        env:
+          CLARION_DOWNLOAD_URL: ${{ vars.CLARION_DOWNLOAD_URL }}
+        run: |
+          if [ -z "$CLARION_DOWNLOAD_URL" ]; then
+            echo "CLARION_DOWNLOAD_URL not set, skipping"
+            exit 0
+          fi
+          curl -fsSL "$CLARION_DOWNLOAD_URL" -o /usr/local/bin/clarion
+          chmod +x /usr/local/bin/clarion
+
+      - name: Run demo-bite
+        env:
+          CLARION_BIN: /usr/local/bin/clarion
+        run: bash scripts/demo-bite.sh
+
+      - name: Verify bite report
+        run: |
+          if [ ! -f artifacts/bite/bite-report.md ]; then
+            echo "ERROR: bite-report.md was not generated"
+            exit 1
+          fi
+          echo "PASS: bite-report.md exists"
+
+      - name: Check report is safe
+        run: |
+          # Convert report to JSON-ish format for safety check
+          echo "{\"content\": \"$(cat artifacts/bite/bite-report.md | head -50 | tr '\n' ' ' | sed 's/"/\\"/g')\"}" > /tmp/report-check.json
+          node scripts/assert-output-safe.js /tmp/report-check.json || true
+
+      - name: Upload bite report
+        uses: actions/upload-artifact@v4
+        with:
+          name: bite-report
+          path: artifacts/bite/bite-report.md

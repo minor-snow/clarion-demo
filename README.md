@@ -1,58 +1,46 @@
 # Clarion Demo
 
-**Governed AI Change in 10 Minutes**
+Clarion governs AI-assisted code changes with executable checks, review boundaries, and adoption reports.
 
-This repository is the fastest way to experience Clarion's core workflow:
+This repository is the public front door for trying Clarion.
 
-```
-observe → workgraph → agent → route/transcript
-```
+## Choose your path
 
-In 10 minutes, you will see how Clarion turns architecture observations
-into governed work items, controlled agent actions, routing recommendations,
-and an auditable transcript.
-
----
-
-**This is not the conformance harness.**
-**This is not the Clarion source repository.**
-**This is the guided first-use demo.**
-
----
-
-## What You'll See
-
-| Step | What Happens | Why It Matters |
-|------|-------------|----------------|
-| 1 | Clarion observes the repository structure | Architecture becomes machine-readable |
-| 2 | Observations become tracked work items | Work is governed, not ad-hoc |
-| 3 | An agent enters under controlled lifecycle | No agent acts without validation |
-| 4 | Routing recommends what to work on next | Decisions are explainable, not black-box |
-| 5 | A transcript records everything that happened | Every action is auditable |
-
-## Quick Start
+### 1. See Clarion enforce a rule
 
 ```bash
-# 1. Install Clarion (or point to your local build)
-export CLARION_BIN=/path/to/clarion
-
-# 2. Bootstrap the demo environment
-./scripts/bootstrap.sh
-
-# 3. Run the guided demo (10 minutes)
-./scripts/run-demo.sh
+./scripts/demo-bite.sh
 ```
 
-See [QUICKSTART.md](QUICKSTART.md) for detailed instructions.
+You will see a protected-file change produce a non-pass result.
 
-## The Key Insight
+### 2. Try Clarion on your own repo
 
-Clarion is not another coding agent. It's a **governance layer** that makes AI engineering activities:
+```bash
+./scripts/trial-on-repo.sh /path/to/your/repo
+```
 
-- **Observable** — you see what the system knows about your architecture
-- **Governed** — agents enter through validated contracts, not raw access
-- **Explainable** — routing decisions come with traces showing why
-- **Auditable** — transcripts record the full lifecycle with no raw leaks
+This runs `clarion trial` and generates `.clarion-trial/clarion_trial_report.md`.
 
-The difference between Clarion and a coding agent is the difference between
-"AI wrote some code" and "AI participated in a governed engineering workflow."
+### 3. Inspect the public contract
+
+Read:
+- [PUBLIC-CONTRACT.md](PUBLIC-CONTRACT.md)
+- [docs/conformance-evidence.md](docs/conformance-evidence.md)
+- [docs/safety-boundaries.md](docs/safety-boundaries.md)
+
+---
+
+## What this repo is
+
+- The first public-facing entrypoint for Clarion
+- A deterministic trust proof
+- A guided bridge into `clarion trial`
+- A curated evidence index
+
+## What this repo is NOT
+
+- Not the Clarion source repository
+- Not the full conformance harness
+- Not a replacement for `clarion trial`
+- Not a fake fixture pretending to be product state

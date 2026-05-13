@@ -7,54 +7,51 @@ on:
     branches: [main]
 
 jobs:
-  smoke:
+  static-checks:
+    name: Static safety checks
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Assert no runtime state committed
+        run: bash scripts/assert-no-runtime-state.sh
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
 
-      - name: Install Clarion
+      - name: Check example envelopes are safe
         run: |
-          # Point to local build or install from registry
-          # For now, skip if not available
-          echo "CLARION_BIN not set — smoke will verify structure only"
+          for f in examples/cli/*.json; do
+            echo "Checking $f..."
+            node scripts/assert-output-safe.js "$f"
+          done
 
-      - name: Verify demo structure
+      - name: Validate fixture pantheon.json
         run: |
-          test -f README.md
-          test -f QUICKSTART.md
-          test -f POSITIONING.md
-          test -f docs/what-you-are-seeing.md
-          test -f docs/limitations.md
-          test -f fixtures/demo-app/package.json
-          test -f fixtures/demo-app/tsconfig.json
-          test -f fixtures/demo-app/src/auth/login.ts
-          test -f fixtures/demo-app/src/api/routes.ts
-          test -f fixtures/demo-app/src/billing/usage.ts
-          test -f envelopes/submit.json
-          test -f envelopes/progress.json
-          test -f envelopes/complete.json
-          test -f scripts/bootstrap.sh
-          test -f scripts/run-demo.sh
-          test -f scripts/reset-demo-state.sh
-          test -f expected/checkpoints.md
-          echo "✓ All demo files present"
-
-      - name: Verify no raw path leaks in docs
-        run: |
-          # Check that no absolute paths appear in documentation
-          if grep -r "H:\\\\Boom" docs/ README.md QUICKSTART.md 2>/dev/null; then
-            echo "ERROR: Absolute paths found in documentation"
+          # Ensure version field is present and equals 1
+          VERSION=$(python3 -c "import json; print(json.load(open('fixtures/trust-bite-app/pantheon.json'))['version'])")
+          if [ "$VERSION" != "1" ]; then
+            echo "ERROR: pantheon.json version must be 1, got: $VERSION"
             exit 1
           fi
-          echo "✓ No path leaks"
+          echo "PASS: pantheon.json version is 1"
 
-      - name: Verify envelope JSON validity
+      - name: Validate patch applies cleanly
         run: |
-          node -e "JSON.parse(require('fs').readFileSync('envelopes/submit.json'))"
-          node -e "JSON.parse(require('fs').readFileSync('envelopes/progress.json'))"
-          node -e "JSON.parse(require('fs').readFileSync('envelopes/complete.json'))"
-          echo "✓ All envelopes are valid JSON"
+          WORK=$(mktemp -d)
+          cp -r fixtures/trust-bite-app/. "$WORK/"
+          cd "$WORK"
+          git init -q
+          git add -A
+          git commit -q -m "init"
+          git apply "$GITHUB_WORKSPACE/scenarios/bite/patches/protected-policy-change.patch"
+          echo "PASS: Patch applies cleanly"
+          rm -rf "$WORK"
+
+      - name: Run fixture tests
+        run: |
+          cd fixtures/trust-bite-app
+          python3 tests/test_policy_engine.py

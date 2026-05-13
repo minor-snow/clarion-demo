@@ -1,0 +1,34 @@
+{
+  "version": "1.0",
+  "command": "trial pr",
+  "timestamp": "2024-01-15T10:30:12Z",
+  "status": "pass",
+  "data": {
+    "prs_analyzed": 38,
+    "avg_size_lines": 23,
+    "median_size_lines": 12,
+    "large_prs_pct": 8,
+    "hot_spots": [
+      {
+        "file": "src/api/routes.py",
+        "change_frequency": 0.40,
+        "avg_delta": 15
+      },
+      {
+        "file": "src/models/user.py",
+        "change_frequency": 0.21,
+        "avg_delta": 8
+      }
+    ],
+    "co_change_patterns": [
+      {
+        "files": ["src/models/user.py", "migrations/"],
+        "frequency": 0.85
+      }
+    ]
+  },
+  "meta": {
+    "engine_version": "0.1.0",
+    "repo": "/home/user/projects/my-flask-app"
+  }
+}

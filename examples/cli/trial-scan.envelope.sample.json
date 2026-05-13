@@ -1,0 +1,27 @@
+{
+  "version": "1.0",
+  "command": "trial scan",
+  "timestamp": "2024-01-15T10:30:05Z",
+  "status": "pass",
+  "data": {
+    "files_analyzed": 47,
+    "governance_surface": 8,
+    "categories": {
+      "security": ["src/auth/permissions.py", "src/auth/tokens.py"],
+      "infrastructure": ["config/production.yml", "Dockerfile"],
+      "business_logic": ["src/billing/calculator.py"],
+      "data": ["migrations/"],
+      "ci_cd": [".github/workflows/deploy.yml"]
+    },
+    "confidence_scores": {
+      "src/auth/permissions.py": 0.92,
+      "src/auth/tokens.py": 0.89,
+      "config/production.yml": 0.85,
+      "src/billing/calculator.py": 0.71
+    }
+  },
+  "meta": {
+    "engine_version": "0.1.0",
+    "repo": "/home/user/projects/my-flask-app"
+  }
+}

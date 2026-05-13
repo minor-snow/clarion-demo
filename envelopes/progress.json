@@ -1,9 +1,0 @@
-{
-  "envelopeVersion": "1",
-  "type": "progress",
-  "agentId": "demo-agent-001",
-  "sessionId": null,
-  "status": "working",
-  "summary": "Identified session validation gap in API routes. Adding expiration check.",
-  "artifacts": ["src/api/routes.ts"]
-}

@@ -1,0 +1,21 @@
+diff --git a/src/policy_engine.py b/src/policy_engine.py
+--- a/src/policy_engine.py
++++ b/src/policy_engine.py
+@@ -37,7 +37,7 @@
+ 
+     total_delta = lines_added + lines_removed
+ 
+-    if is_new_file:
++    if is_new_file and total_delta < 500:
+         return {
+             "risk_level": "low",
+             "reason": "New file addition",
+@@ -45,7 +45,7 @@
+             "score": 10,
+         }
+ 
+-    if total_delta > 100:
++    if total_delta > 200:
+         return {
+             "risk_level": "high",
+             "reason": f"Large change: {total_delta} lines modified",

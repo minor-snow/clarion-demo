@@ -1,45 +1,31 @@
 # Limitations
 
-This demo is intentionally constrained. Here's what it does NOT show:
+## Demo limitations
 
-## Not Shown in This Demo
+1. **Single rule type** — The demo only exercises the protected-file rule. Clarion supports additional rule types not shown here.
 
-| Feature | Status | Where to Find It |
-|---------|--------|-------------------|
-| Multi-agent swarm (2+ agents) | Implemented | `clarion-release` test suite |
-| Conflict detection between agents | Implemented | `clarion-release` swarm tests |
-| Join point detection | Implemented | `clarion-release` swarm tests |
-| Routing v2 (dependency/blast radius/capability) | Implemented | Golden fixtures in main repo |
-| Local Review Console (browser UI) | Implemented | `npm run console` in main repo |
-| Remote/cloud deployment | Not implemented | Not planned for current phase |
-| Multi-repo governance | Not implemented | Not planned |
-| LLM integration | Not implemented | Not planned |
+2. **Minimal fixture** — The fixture is a small Python app. Real repositories are larger and more complex.
 
-## Demo Constraints
+3. **No multi-rule interaction** — The demo does not show how multiple rules interact or compose.
 
-- **Single agent only.** The demo shows one agent lifecycle. Multi-agent coordination
-  is proven in the test suite but not demonstrated here for simplicity.
+4. **No CI integration demo** — The demo runs locally. CI integration is documented but not demonstrated end-to-end.
 
-- **Pre-approved candidates.** In real use, DSA candidates go through human review.
-  The demo auto-approves for speed.
+5. **No agent interaction** — The demo applies a patch manually. It does not show an actual AI agent being governed in real-time.
 
-- **Local only.** Everything runs on your machine. No cloud, no remote services.
+## Trial limitations
 
-- **Fixed fixture.** The demo app is a small TypeScript project designed to produce
-  interesting architectural observations. Real repos produce richer results.
+1. **Heuristic recommendations** — Trial's rule suggestions are heuristic-based. They require human review before adoption.
 
-## What's Real vs. Scripted
+2. **Git history dependent** — Trial analyzes git history. Repos with limited history produce less useful reports.
 
-| Aspect | Real | Scripted |
-|--------|------|----------|
-| DSA observation | ✅ Real scan of fixture app | — |
-| Work item creation | ✅ Real workgraph operations | — |
-| Agent envelope validation | ✅ Real gateway validation | — |
-| Routing recommendations | ✅ Real deterministic engine | — |
-| Transcript generation | ✅ Real projection from events | — |
-| The fixture app itself | — | ✅ Pre-built for demo |
-| Candidate approval | — | ✅ Auto-approved for speed |
-| Agent "doing work" | — | ✅ Simulated via envelopes |
+3. **Language agnostic** — Trial does not perform language-specific analysis. It works at the file/path level.
 
-The governance layer is real. The "work being done" is simulated.
-That's the point — Clarion governs the process, it doesn't do the coding.
+4. **Point-in-time snapshot** — Trial evaluates the repo as it exists now. It does not predict future changes.
+
+## Platform limitations
+
+1. **Bash required** — Scripts require bash. Windows users need Git Bash or WSL.
+
+2. **Git required** — The demo and trial both require git.
+
+3. **Binary distribution** — Clarion is distributed as a binary. Source is not available.
