@@ -13,7 +13,7 @@ Get from zero to a governance enforcement demo in under 5 minutes.
 1. Clone this repo:
 
 ```bash
-git clone https://github.com/anthropic/clarion-demo.git
+git clone https://github.com/minor-snow/clarion-demo.git
 cd clarion-demo
 ```
 
@@ -24,13 +24,13 @@ cd clarion-demo
 ```
 
 3. Read the output. You will see:
-   - A protected file (`src/policy_engine.py`) was modified
-   - Clarion returned a **non-pass** verdict
+   - A protected policy file (`src/policy_engine.py`) was modified
+   - Clarion returned a **non-pass** governance result
    - A report was generated at `artifacts/bite/bite-report.md`
 
 ## What happened
 
-The demo applied a patch to a file marked as protected in `pantheon.json`. Clarion detected the violation and produced a governance verdict that is not `pass`.
+The demo applies a patch to a file marked as protected in `pantheon.json` and `pantheon.alpha.json`. Clarion evaluates the resulting diff and returns a governance result that is not `pass`.
 
 This proves the enforcement layer is active and deterministic.
 

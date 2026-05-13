@@ -17,13 +17,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
       - name: Download Clarion binary
         env:
           CLARION_DOWNLOAD_URL: ${{ vars.CLARION_DOWNLOAD_URL }}
         run: |
           if [ -z "$CLARION_DOWNLOAD_URL" ]; then
-            echo "CLARION_DOWNLOAD_URL not set, skipping"
-            exit 0
+            echo "ERROR: CLARION_DOWNLOAD_URL not set"
+            exit 1
           fi
           curl -fsSL "$CLARION_DOWNLOAD_URL" -o /usr/local/bin/clarion
           chmod +x /usr/local/bin/clarion
@@ -43,9 +48,7 @@ jobs:
 
       - name: Check report is safe
         run: |
-          # Convert report to JSON-ish format for safety check
-          echo "{\"content\": \"$(cat artifacts/bite/bite-report.md | head -50 | tr '\n' ' ' | sed 's/"/\\"/g')\"}" > /tmp/report-check.json
-          node scripts/assert-output-safe.js /tmp/report-check.json || true
+          node scripts/assert-output-safe.js artifacts/bite/bite-report.md
 
       - name: Upload bite report
         uses: actions/upload-artifact@v4

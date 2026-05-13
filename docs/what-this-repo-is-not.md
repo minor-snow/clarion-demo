@@ -6,7 +6,7 @@ This repo does not contain the Clarion engine, CLI implementation, or any produc
 
 ## Not the full conformance harness
 
-The trust-bite demo exercises one rule type (protected-file modification). The full conformance harness tests dozens of rule types, edge cases, and integration scenarios. That harness is internal.
+The trust-bite demo exercises one governed path around a protected policy-file change. The full conformance harness tests dozens of rule types, edge cases, and integration scenarios. That harness is internal.
 
 ## Not a replacement for `clarion trial`
 

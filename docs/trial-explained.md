@@ -32,7 +32,7 @@ Evaluates recent pull request patterns:
 
 ### `trial report`
 
-Generates the final adoption report at `.clarion-trial/clarion_trial_report.md`:
+Generates the final adoption report at `.clarion-trial/clarion_trial_report.md` when the lane state is sufficient:
 - Summary of findings
 - Recommended governance rules
 - Adoption complexity estimate
@@ -47,7 +47,7 @@ Analyzes a specific bug scenario:
 
 ## Output format
 
-All trial subcommands produce JSON envelopes on stdout. The report subcommand additionally writes the markdown report file.
+All trial subcommands produce JSON envelopes on stdout. The report subcommand additionally writes the markdown report file when available. The public wrapper in this repo can synthesize a fallback bridge report from collected lane logs.
 
 ## Safety
 

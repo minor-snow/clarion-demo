@@ -4,40 +4,45 @@ When `clarion check` runs against the fixture after applying the protected-polic
 
 ## Status
 
-**non-pass** (fail)
+**non-pass**
 
 ## Envelope (JSON)
 
 ```json
 {
-  "version": "1.0",
-  "command": "check",
-  "status": "fail",
-  "data": {
-    "violations": [
-      {
-        "rule_id": "no-modify-policy-engine",
-        "type": "protected-file",
-        "file": "src/policy_engine.py",
-        "message": "Protected file was modified without governance review"
-      }
-    ],
-    "files_checked": 1,
-    "rules_evaluated": 1
-  }
+  "schema_version": "pantheon_cli_result@0.1.0",
+  "command": "pantheon check",
+  "target_type": "contract_gate",
+  "status": "failed",
+  "error_code": "missing_contract",
+  "summary": {
+    "risk_level": "critical",
+    "contract_status": "missing",
+    "reason_kinds": [
+      "missing_contract"
+    ]
+  },
+  "verdict": "requires_contract",
+  "findings": [
+    {
+      "kind": "missing_contract",
+      "severity": "blocking",
+      "message": "critical-risk changes detected without a valid contract."
+    }
+  ]
 }
 ```
 
 ## Human-readable summary
 
 ```
-FAIL: Protected file violation
+NON-PASS: Contract required
 
-  Rule: no-modify-policy-engine
-  File: src/policy_engine.py
-  Message: Protected file was modified without governance review
+  Risk level: critical
+  Contract status: missing
+  Message: critical-risk changes detected without a valid contract.
 
-1 violation found. Verdict: fail.
+Verdict: requires_contract
 ```
 
 ## Exit code

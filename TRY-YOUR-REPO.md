@@ -26,7 +26,7 @@ Run `clarion trial` against any repository to get an adoption report.
 1. **Doctor** — checks your repo meets minimum requirements
 2. **Scan** — analyzes repository structure and identifies governance surfaces
 3. **PR** — evaluates recent pull request patterns
-4. **Report** — generates `.clarion-trial/clarion_trial_report.md`
+4. **Report** — attempts to generate `.clarion-trial/clarion_trial_report.md`
 5. **Bug** (optional) — if `--bug-title` is provided, runs a trial bug analysis
 
 ## Examples
@@ -58,6 +58,10 @@ The trial report is written to:
 ```
 
 See [docs/interpreting-trial-report.md](docs/interpreting-trial-report.md) for how to read the report.
+
+If the canonical `clarion trial report` output is unavailable for your repo state,
+the wrapper writes a fallback bridge report at the same path and stores step logs
+under `.clarion-trial/`.
 
 ## Troubleshooting
 

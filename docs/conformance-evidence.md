@@ -6,10 +6,10 @@ This document indexes the evidence that Clarion's governance enforcement works a
 
 | Property | Evidence |
 |----------|----------|
-| Protected-file detection | `./scripts/demo-bite.sh` produces non-pass verdict |
+| Trust-bite enforcement | `./scripts/demo-bite.sh` produces a real non-pass governance result |
 | Determinism | Same fixture + patch always produces same result |
 | No bypass | Patch applied via git; no special agent path |
-| Machine-readable output | JSON envelope with structured violation data |
+| Machine-readable output | JSON envelope with structured verdict, findings, and next actions |
 | Human-readable output | Generated `bite-report.md` |
 
 ## Reproducibility
@@ -34,14 +34,14 @@ The `.github/workflows/trust-bite.yml` workflow runs the bite demo on every push
 ## Limitations
 
 This evidence covers:
-- ✅ Protected-file rule enforcement
-- ✅ Non-pass verdict generation
-- ✅ JSON envelope format
+- Protected policy-file changes producing a governed non-pass result
+- Non-pass verdict generation
+- JSON envelope format
 
 This evidence does NOT cover:
-- ❌ All rule types (only protected-file is demonstrated)
-- ❌ Performance characteristics
-- ❌ Integration with external CI systems
-- ❌ Multi-rule interactions
+- All rule types (only one trust-bite path is demonstrated)
+- Performance characteristics
+- Integration with external CI systems
+- Multi-rule interactions
 
 See [limitations.md](limitations.md) for full details.

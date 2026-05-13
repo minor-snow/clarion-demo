@@ -1,6 +1,6 @@
 # Interpreting the Trial Report
 
-The trial report is generated at `.clarion-trial/clarion_trial_report.md` in your repository.
+The trial report is generated at `.clarion-trial/clarion_trial_report.md` in your repository. If the canonical Trial report is not available for the current repo state, the wrapper writes a fallback bridge report at the same path and keeps the raw lane logs beside it.
 
 ## Report sections
 

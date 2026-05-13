@@ -12,7 +12,7 @@ This repository is the public front door for trying Clarion.
 ./scripts/demo-bite.sh
 ```
 
-You will see a protected-file change produce a non-pass result.
+You will see a protected policy-file change produce a non-pass result.
 
 ### 2. Try Clarion on your own repo
 

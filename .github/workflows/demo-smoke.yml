@@ -24,20 +24,29 @@ jobs:
 
       - name: Check example envelopes are safe
         run: |
-          for f in examples/cli/*.json; do
+          for f in README.md QUICKSTART.md TRUST-PROOF.md TRY-YOUR-REPO.md PUBLIC-CONTRACT.md docs/*.md examples/cli/*.json examples/reports/*.md; do
             echo "Checking $f..."
             node scripts/assert-output-safe.js "$f"
           done
 
       - name: Validate fixture pantheon.json
         run: |
-          # Ensure version field is present and equals 1
-          VERSION=$(python3 -c "import json; print(json.load(open('fixtures/trust-bite-app/pantheon.json'))['version'])")
+          VERSION=$(python3 -c "import json; data=json.load(open('fixtures/trust-bite-app/pantheon.json')); print(data['version'])")
+          PROTECTED_COUNT=$(python3 -c "import json; data=json.load(open('fixtures/trust-bite-app/pantheon.json')); print(len(data.get('protected', [])))")
+          REVIEW_COUNT=$(python3 -c "import json; data=json.load(open('fixtures/trust-bite-app/pantheon.json')); print(len(data.get('review_required', [])))")
           if [ "$VERSION" != "1" ]; then
             echo "ERROR: pantheon.json version must be 1, got: $VERSION"
             exit 1
           fi
-          echo "PASS: pantheon.json version is 1"
+          if [ "$PROTECTED_COUNT" -lt 1 ]; then
+            echo "ERROR: pantheon.json must declare at least one protected path"
+            exit 1
+          fi
+          if [ "$REVIEW_COUNT" -lt 1 ]; then
+            echo "ERROR: pantheon.json must declare at least one review_required path"
+            exit 1
+          fi
+          echo "PASS: pantheon.json uses the current loader shape"
 
       - name: Validate patch applies cleanly
         run: |
@@ -46,7 +55,7 @@ jobs:
           cd "$WORK"
           git init -q
           git add -A
-          git commit -q -m "init"
+          git -c user.name="clarion-demo" -c user.email="clarion-demo@example.invalid" commit -q -m "init"
           git apply "$GITHUB_WORKSPACE/scenarios/bite/patches/protected-policy-change.patch"
           echo "PASS: Patch applies cleanly"
           rm -rf "$WORK"

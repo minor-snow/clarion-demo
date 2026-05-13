@@ -11,6 +11,10 @@ node_modules/
 # Temp
 .tmp/
 
+# Python
+__pycache__/
+*.pyc
+
 # OS
 .DS_Store
 Thumbs.db

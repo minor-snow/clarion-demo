@@ -4,7 +4,7 @@ set -euo pipefail
 # demo-bite.sh — Run the trust-bite demo
 #
 # Copies the fixture to a temp directory, applies the protected-file patch,
-# runs clarion check, and asserts a non-pass result.
+# runs clarion check against the resulting diff, and asserts a non-pass result.
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
@@ -13,6 +13,11 @@ CLARION="${CLARION_BIN:-clarion}"
 FIXTURE="$REPO_ROOT/fixtures/trust-bite-app"
 PATCH="$REPO_ROOT/scenarios/bite/patches/protected-policy-change.patch"
 ARTIFACTS_DIR="$REPO_ROOT/artifacts/bite"
+
+if ! "$CLARION" --version >/dev/null 2>&1; then
+  echo "ERROR: clarion binary is not runnable: $CLARION"
+  exit 2
+fi
 
 # --- Setup temp workspace ---
 WORK="$(mktemp -d)"
@@ -27,12 +32,10 @@ echo "2. Initializing git repository..."
 cd "$WORK"
 git init -q
 git add -A
-git commit -q -m "Initial commit: trust-bite-app fixture"
+git -c user.name="clarion-demo" -c user.email="clarion-demo@example.invalid" commit -q -m "Initial commit: trust-bite-app fixture"
 
 echo "3. Applying protected-file patch..."
 git apply "$PATCH"
-git add -A
-git commit -q -m "Modify protected policy_engine.py"
 
 echo "4. Running clarion check..."
 echo ""
@@ -53,8 +56,15 @@ if [ "$EXIT_CODE" -eq 0 ]; then
   exit 1
 fi
 
+if ! printf '%s' "$CHECK_OUTPUT" | grep -q '"schema_version"'; then
+  echo "ERROR: clarion check did not emit a JSON CLI envelope."
+  echo ""
+  echo "$CHECK_OUTPUT"
+  exit 2
+fi
+
 echo "5. Verdict: NON-PASS (as expected)"
-echo "   The protected-file rule was enforced."
+echo "   Clarion blocked the unchecked policy-file change."
 echo ""
 
 # --- Generate report ---
@@ -69,15 +79,16 @@ Generated: $(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
 **Verdict: NON-PASS**
 
-The protected file \`src/policy_engine.py\` was modified and Clarion correctly
-returned a non-pass result.
+The protected policy file \`src/policy_engine.py\` was modified and Clarion correctly
+returned a real non-pass governance result for the resulting diff.
 
 ## Details
 
 - Fixture: \`fixtures/trust-bite-app/\`
 - Patch: \`scenarios/bite/patches/protected-policy-change.patch\`
 - Exit code: $EXIT_CODE
-- Rule triggered: \`no-modify-policy-engine\`
+- Triggered file: \`src/policy_engine.py\`
+- Check mode: live worktree diff
 
 ## Raw output
 
@@ -87,8 +98,8 @@ $CHECK_OUTPUT
 
 ## Interpretation
 
-This proves that Clarion's governance enforcement is active. An AI agent
-modifying a protected file will be caught and the change will not pass review.
+This proves that Clarion's governance enforcement is active. An unchecked change
+to a protected policy file is surfaced as a machine-readable non-pass result.
 EOF
 
 echo "6. Report written to: artifacts/bite/bite-report.md"

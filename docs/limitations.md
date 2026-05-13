@@ -2,7 +2,7 @@
 
 ## Demo limitations
 
-1. **Single rule type** — The demo only exercises the protected-file rule. Clarion supports additional rule types not shown here.
+1. **Single trust-bite path** — The demo only exercises one protected policy-file scenario. Clarion supports additional rule types and workflows not shown here.
 
 2. **Minimal fixture** — The fixture is a small Python app. Real repositories are larger and more complex.
 

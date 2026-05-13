@@ -1,24 +1,14 @@
 {
   "version": 1,
-  "project": {
-    "name": "trust-bite-app",
-    "description": "Minimal Python app for demonstrating Clarion governance enforcement"
-  },
-  "governance": {
-    "protected_files": [
-      "src/policy_engine.py"
-    ],
-    "review_required": [
-      "pantheon.json"
-    ]
-  },
-  "rules": [
-    {
-      "id": "no-modify-policy-engine",
-      "description": "The policy engine must not be modified without governance review",
-      "type": "protected-file",
-      "target": "src/policy_engine.py",
-      "action": "fail"
-    }
-  ]
+  "protected": [
+    "src/policy_engine.py",
+    ".pantheon/**",
+    ".git/**"
+  ],
+  "review_required": [
+    "pantheon.json",
+    "pantheon.alpha.json"
+  ],
+  "generated": [],
+  "path_roles": {}
 }

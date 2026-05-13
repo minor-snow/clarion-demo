@@ -4,7 +4,7 @@ A minimal Python application used as a fixture for the Clarion governance demo.
 
 ## Purpose
 
-This fixture demonstrates that Clarion can detect and reject unauthorized modifications to protected files.
+This fixture demonstrates that Clarion can detect a protected policy-file change and return a real non-pass governance result.
 
 ## Structure
 
@@ -15,12 +15,12 @@ src/
 tests/
   test_policy_engine.py — Unit tests for the policy engine
 pantheon.json        — Governance configuration (version 1 schema)
-AGENTS.md            — Agent rules referencing protected files
+AGENTS.md            — Human-readable projection of the machine policy
 ```
 
 ## The protected file
 
-`src/policy_engine.py` is listed in `pantheon.json` under `governance.protected_files`. Any modification to this file will cause `clarion check` to return a non-pass verdict.
+`src/policy_engine.py` is listed in both `pantheon.json` and `pantheon.alpha.json` under `protected`. Any unchecked modification to this file should cause `clarion check` to return a non-pass result.
 
 ## Running tests
 
