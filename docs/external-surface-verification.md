@@ -51,7 +51,6 @@ No absolute paths. No raw diff hunks. No secrets.
 - Fallback writes only to `bridge_report.md`, never to canonical path
 - Output explicitly states: "This is not a Clarion Trial report."
 - Runtime proof deferred: requires a target repo with trial lanes available
-
 ## Surface alignment summary
 
 | Surface | Status |
@@ -67,4 +66,19 @@ No absolute paths. No raw diff hunks. No secrets.
 
 ## Conclusion
 
-External surface is verified and ready for review/publication.
+The Clarion Demo external surface is verified for external review / limited publication.
+
+Verified:
+- deterministic trust-bite path
+- public documentation safety
+- separate trial bridge fallback semantics
+- no raw output embedded in shareable reports
+- no absolute paths, raw diff hunks, or secret-like payloads in public docs/artifacts
+
+Deferred:
+- full runtime validation of `trial-on-repo.sh` against a target repository with Trial lanes available
+
+The repository is ready to serve as Clarion's public front door for:
+1. seeing Clarion produce a real non-pass governance result,
+2. being guided toward `clarion trial` on a user repository,
+3. inspecting public-surface expectations and safety boundaries.
