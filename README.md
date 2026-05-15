@@ -15,6 +15,14 @@ This repository is the public front door for trying Clarion.
 
 Expected takeaway: Clarion produces a real non-pass result when a protected surface changes, and flags review-required surfaces for human attention.
 
+### 1b. See Trial on a bare repo (honest first-encounter)
+
+```bash
+./scripts/demo-trial-empty-repo.sh
+```
+
+Expected takeaway: Most repos don't have governance surfaces on day one. This demo shows the realistic Trial output for a repo with no ARCHITECTURE.md, no AGENTS.md, no CI, no tests. The point is not the happy path — it is the path most users will actually see first.
+
 ### 2. Try Clarion on your own repo
 
 ```bash
