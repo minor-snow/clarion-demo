@@ -6,7 +6,7 @@ enforcement type and the evidence that verifies it.
 | Rule | Type | Evidence in this repo | Status |
 |------|------|----------------------|--------|
 | Do not modify protected core files | machine enforcement | `demo-bite.sh` → non-pass verdict | verified |
-| Review-required surfaces need human attention | governance preview | `trial pr` → requires_review | planned |
+| Review-required surfaces need human attention | governance preview | `demo-review-required.sh` → requires_contract | verified |
 | No raw output in public reports | artifact safety | `assert-output-safe.js` | verified |
 | No absolute local paths in shared artifacts | artifact safety | `assert-output-safe.js` | verified |
 | No raw diff hunks in human-facing docs | artifact safety | `assert-output-safe.js` | verified |

@@ -13,6 +13,12 @@ The following files are governed by Clarion and must not be modified by agents w
 
 - `src/policy_engine.py` — Core risk decision logic. Changes produce a non-pass governance result unless they are covered by an approved Clarion workflow.
 
+## Review-required files
+
+The following files require human review when modified:
+
+- `src/llm_adapter.py` — LLM provider interface. Changes are flagged for human attention and produce a `requires_review` governance state.
+
 ## Allowed modifications
 
 Agents may freely modify:

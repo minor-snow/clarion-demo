@@ -9,10 +9,11 @@ This repository is the public front door for trying Clarion.
 ### 1. See Clarion enforce a rule
 
 ```bash
-./scripts/demo-bite.sh
+./scripts/demo-bite.sh              # protected → non-pass
+./scripts/demo-review-required.sh   # review_required → requires_review
 ```
 
-Expected takeaway: Clarion produces a real non-pass result when a protected surface changes.
+Expected takeaway: Clarion produces a real non-pass result when a protected surface changes, and flags review-required surfaces for human attention.
 
 ### 2. Try Clarion on your own repo
 
@@ -42,7 +43,7 @@ Expected takeaway: Clarion's external output is structured, sanitized, and does 
 | Governance rule | Human-visible effect | Machine evidence |
 |---|---|---|
 | Protected files cannot be silently changed | Agent avoids / flags core policy edits | `demo-bite.sh` returns non-pass |
-| Review-required files need human attention | Agent warns before modifying core surfaces | `trial pr` reports `requires_review` |
+| Review-required files need human attention | Agent warns before modifying core surfaces | `demo-review-required.sh` reports governance state |
 | No raw output in shareable reports | Reports contain only sanitized summaries | `assert-output-safe.js` passes |
 | No absolute paths in public artifacts | Local paths never leak into shared docs | `assert-output-safe.js` passes |
 

@@ -1,0 +1,12 @@
+diff --git a/src/llm_adapter.py b/src/llm_adapter.py
+--- a/src/llm_adapter.py
++++ b/src/llm_adapter.py
+@@ -11,7 +11,7 @@
+ 
+ # Default configuration
+ DEFAULT_PROVIDER = "local"
+-DEFAULT_TIMEOUT = 30
++DEFAULT_TIMEOUT = 60
+ MAX_RETRIES = 3
+ 
+ 

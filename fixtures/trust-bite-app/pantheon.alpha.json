@@ -7,11 +7,13 @@
   ],
   "review_required": [
     "pantheon.json",
-    "pantheon.alpha.json"
+    "pantheon.alpha.json",
+    "src/llm_adapter.py"
   ],
   "generated": [],
   "path_roles": {
     "src/policy_engine.py": "deterministic_governance_core",
+    "src/llm_adapter.py": "llm_adapter_surface",
     "src/app.py": "application_logic",
     "tests/**": "test_surface"
   }
