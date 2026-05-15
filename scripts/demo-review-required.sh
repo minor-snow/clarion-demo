@@ -5,7 +5,7 @@ set -euo pipefail
 #
 # Copies the fixture to a temp directory, applies a change to a review-required
 # file, runs clarion check against the resulting diff, and shows the governance
-# state (requires_review or equivalent).
+# state (requires_contract or equivalent).
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"

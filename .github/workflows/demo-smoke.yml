@@ -17,6 +17,9 @@ jobs:
       - name: Assert no runtime state committed
         run: bash scripts/assert-no-runtime-state.sh
 
+      - name: Assert surface consistency (drift regression)
+        run: bash scripts/assert-surface-consistency.sh
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:

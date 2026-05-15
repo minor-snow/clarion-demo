@@ -19,7 +19,7 @@ enforcement type and the evidence that verifies it.
 **machine enforcement** — Clarion CLI produces a structured verdict. The demo
 can reproduce this result deterministically.
 
-**governance preview** — Clarion surfaces a governance state (like `requires_review`)
+**governance preview** — Clarion surfaces a governance state (like `requires_contract`)
 that informs but does not block. The demo plans to demonstrate this path.
 
 **artifact safety** — A post-processing check ensures public-facing outputs meet

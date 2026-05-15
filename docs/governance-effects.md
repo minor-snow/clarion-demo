@@ -21,7 +21,7 @@ These checks produce concrete results when risky changes occur.
 
 Examples:
 - Protected file changed → non-pass verdict
-- Review-required file changed → requires_review
+- Review-required file changed → requires_contract
 - Missing contract → requires_contract
 - Unsafe public artifact → withheld
 
