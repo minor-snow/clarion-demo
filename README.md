@@ -12,7 +12,7 @@ This repository is the public front door for trying Clarion.
 ./scripts/demo-bite.sh
 ```
 
-You will see a protected policy-file change produce a non-pass result.
+Expected takeaway: Clarion produces a real non-pass result when a protected surface changes.
 
 ### 2. Try Clarion on your own repo
 
@@ -20,7 +20,9 @@ You will see a protected policy-file change produce a non-pass result.
 ./scripts/trial-on-repo.sh /path/to/your/repo
 ```
 
-This runs `clarion trial` and writes either:
+Expected takeaway: Clarion tells you which governance lanes are useful in your repository today.
+
+This writes either:
 - `.clarion-trial/clarion_trial_report.md` when the canonical Trial report is produced
 - `.clarion-trial/bridge_report.md` when the wrapper has to fall back to collected lane logs
 
@@ -30,6 +32,21 @@ Read:
 - [PUBLIC-CONTRACT.md](PUBLIC-CONTRACT.md)
 - [docs/conformance-evidence.md](docs/conformance-evidence.md)
 - [docs/safety-boundaries.md](docs/safety-boundaries.md)
+
+Expected takeaway: Clarion's external output is structured, sanitized, and does not require reading private stores.
+
+---
+
+## What this demo proves
+
+| Governance rule | Human-visible effect | Machine evidence |
+|---|---|---|
+| Protected files cannot be silently changed | Agent avoids / flags core policy edits | `demo-bite.sh` returns non-pass |
+| Review-required files need human attention | Agent warns before modifying core surfaces | `trial pr` reports `requires_review` |
+| No raw output in shareable reports | Reports contain only sanitized summaries | `assert-output-safe.js` passes |
+| No absolute paths in public artifacts | Local paths never leak into shared docs | `assert-output-safe.js` passes |
+
+The third column is the point. Clarion has machine evidence, not just AI self-discipline.
 
 ---
 

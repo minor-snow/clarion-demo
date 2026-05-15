@@ -99,6 +99,15 @@ This proves that Clarion's governance enforcement is active. An unchecked change
 to a protected policy file is surfaced as a machine-readable non-pass result.
 The human-facing report is intentionally sanitized; the raw JSON envelope is kept
 as a local artifact instead of being embedded directly into this markdown file.
+
+## Source of authority
+
+This result comes from Clarion CLI output, not from agent self-report.
+
+- Command: \`pantheon check\`
+- Envelope schema: \`pantheon_cli_result@0.1.0\`
+- Verdict: non-pass (see \`artifacts/bite/result.json\` for exact value)
+- Disclosure: \`full-local\`
 EOF
 
 echo "6. Report written to: artifacts/bite/bite-report.md"
