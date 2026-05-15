@@ -52,4 +52,4 @@ The dogfood phase is complete when:
 
 ## Current status
 
-_Not yet started. This matrix will be filled during P21 adoption surface hardening._
+_Not yet started. This matrix will be filled during adoption surface hardening._

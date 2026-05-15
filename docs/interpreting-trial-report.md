@@ -1,6 +1,6 @@
 # Interpreting the Trial Output
 
-When Clarion CLI produces a canonical Trial report, it is written to `.clarion-trial/clarion_trial_report.md`.
+When Clarion CLI produces a canonical Trial report, it is written to `.clarion-trial/report/clarion_trial_report.md`.
 
 If the canonical report is unavailable for the current repo state, the wrapper in
 this repo writes `.clarion-trial/bridge_report.md` instead and keeps the raw lane

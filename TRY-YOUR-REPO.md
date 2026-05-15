@@ -34,11 +34,13 @@ Run `clarion trial` against any repository to get an adoption report.
 The wrapper uses `.clarion-trial/` inside the target repository:
 
 - Canonical report, when produced by Clarion CLI:
-  `.clarion-trial/clarion_trial_report.md`
+  `.clarion-trial/report/clarion_trial_report.md`
 - Wrapper-owned fallback, when the canonical report is unavailable:
   `.clarion-trial/bridge_report.md`
 - Lane logs:
   `.clarion-trial/trial-*.log`
+- Structured lane outputs:
+  `.clarion-trial/doctor/`, `.clarion-trial/scan/`, `.clarion-trial/pr/`
 
 If the canonical report is unavailable, the wrapper prints that explicitly and
 writes a bridge report instead. The bridge report is not a Clarion Trial report.

@@ -61,9 +61,9 @@ fi
 
 TRIAL_OUT_DIR="$REPO_PATH/.clarion-trial"
 mkdir -p "$TRIAL_OUT_DIR"
-CANONICAL_REPORT_PATH="$TRIAL_OUT_DIR/clarion_trial_report.md"
+CANONICAL_REPORT_PATH="$TRIAL_OUT_DIR/report/clarion_trial_report.md"
 BRIDGE_REPORT_PATH="$TRIAL_OUT_DIR/bridge_report.md"
-rm -f "$CANONICAL_REPORT_PATH" "$BRIDGE_REPORT_PATH"
+rm -f "$BRIDGE_REPORT_PATH"
 
 run_trial_step() {
   local name="$1"

@@ -10,10 +10,10 @@ This repository is the public front door for trying Clarion.
 
 ```bash
 ./scripts/demo-bite.sh              # protected → non-pass
-./scripts/demo-review-required.sh   # review_required → requires_review
+./scripts/demo-review-required.sh   # review_required → requires_contract
 ```
 
-Expected takeaway: Clarion produces a real non-pass result when a protected surface changes, and flags review-required surfaces for human attention.
+Expected takeaway: Clarion produces a real non-pass result when a protected surface changes, and flags review-required surfaces for governance review.
 
 ### 1b. See Trial on a bare repo (honest first-encounter)
 
@@ -32,7 +32,7 @@ Expected takeaway: Most repos don't have governance surfaces on day one. This de
 Expected takeaway: Clarion tells you which governance lanes are useful in your repository today.
 
 This writes either:
-- `.clarion-trial/clarion_trial_report.md` when the canonical Trial report is produced
+- `.clarion-trial/report/clarion_trial_report.md` when the canonical Trial report is produced
 - `.clarion-trial/bridge_report.md` when the wrapper has to fall back to collected lane logs
 
 ### 3. Inspect the public contract

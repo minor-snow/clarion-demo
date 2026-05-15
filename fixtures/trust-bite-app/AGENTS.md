@@ -17,7 +17,7 @@ The following files are governed by Clarion and must not be modified by agents w
 
 The following files require human review when modified:
 
-- `src/llm_adapter.py` — LLM provider interface. Changes are flagged for human attention and produce a `requires_review` governance state.
+- `src/llm_adapter.py` — LLM provider interface. Changes are flagged for governance review and produce a `requires_contract` verdict when no contract covers the change.
 
 ## Allowed modifications
 

@@ -31,7 +31,7 @@ Evaluates current or recent change patterns:
 
 ### `trial report`
 
-Generates the canonical adoption report at `.clarion-trial/clarion_trial_report.md` when the current lane state is sufficient.
+Generates the canonical adoption report at `.clarion-trial/report/clarion_trial_report.md` when the current lane state is sufficient.
 
 ### `trial bug` (optional)
 

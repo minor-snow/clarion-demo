@@ -47,10 +47,14 @@ No absolute paths. No raw diff hunks. No secrets.
 ## Trial bridge — design verification
 
 - Script uses `BRIDGE_REPORT_PATH="$TRIAL_OUT_DIR/bridge_report.md"`
-- Canonical report path: `$TRIAL_OUT_DIR/clarion_trial_report.md`
+- Canonical report path: `$TRIAL_OUT_DIR/report/clarion_trial_report.md`
 - Fallback writes only to `bridge_report.md`, never to canonical path
 - Output explicitly states: "This is not a Clarion Trial report."
 - Runtime proof deferred: requires a target repo with trial lanes available
+
+Note: An earlier version of the script checked the wrong canonical path
+(flat `$TRIAL_OUT_DIR/clarion_trial_report.md` instead of the nested
+`report/` subdirectory). This was corrected in the drift audit.
 ## Surface alignment summary
 
 | Surface | Status |

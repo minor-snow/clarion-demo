@@ -53,8 +53,7 @@ echo ""
 
 # --- Interpret result ---
 # For review-required files, Clarion may return:
-# - requires_review (the file needs human attention)
-# - requires_contract (no contract covers this change)
+# - requires_contract (no contract covers this change — human review needed)
 # - pass (if a valid contract exists)
 # Any non-pass result demonstrates the governance surface.
 
