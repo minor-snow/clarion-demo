@@ -35,6 +35,15 @@ This writes either:
 - `.clarion-trial/report/clarion_trial_report.md` when the canonical Trial report is produced
 - `.clarion-trial/bridge_report.md` when the wrapper has to fall back to collected lane logs
 
+### 2b. Understand the automated agent path
+
+Read:
+- [docs/agent-automation-path.md](docs/agent-automation-path.md)
+- [docs/adoption-path.md](docs/adoption-path.md)
+
+Expected takeaway: agent automation is a governed adoption lane that comes
+after trustworthy PR governance, not before it.
+
 ### 3. Inspect the public contract
 
 Read:
@@ -64,6 +73,7 @@ The third column is the point. Clarion has machine evidence, not just AI self-di
 - The first public-facing entrypoint for Clarion
 - A deterministic trust proof for governance verdicts
 - A guided bridge into `clarion trial`
+- A documented path toward governed agent automation
 - A curated evidence index
 
 ## What this repo is NOT

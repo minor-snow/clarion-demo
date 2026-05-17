@@ -46,6 +46,9 @@ Clarion provides both, and this demo shows how they connect.
 | Machine enforcement | `clarion check` evaluates the diff | `demo-bite.sh` produces a non-pass result |
 | Artifact safety | `assert-output-safe.js` scans reports | No absolute paths or raw output in shared docs |
 
+For how these pieces connect into a governed automated agent loop, see
+[agent-automation-path.md](agent-automation-path.md).
+
 ## Limitations
 
 Not every governance rule has machine enforcement today. Some rules are

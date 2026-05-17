@@ -45,5 +45,6 @@ This evidence does NOT cover:
 - Performance characteristics
 - Integration with external CI systems
 - Multi-rule interactions
+- Public runtime proof of a full automated coding-agent loop
 
 See [limitations.md](limitations.md) for full details.

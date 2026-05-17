@@ -4,6 +4,10 @@
 
 `clarion trial` is a command suite that evaluates a repository's readiness for Clarion governance adoption. It runs non-destructively against your existing repo and produces adoption signals.
 
+One of those adoption outcomes is whether the repository is ready for governed
+agent automation. Trial is not the agent runtime itself; it is part of the path
+that tells you whether the agent lane should be enabled yet.
+
 ## Trial subcommands
 
 ### `trial doctor`
@@ -53,3 +57,6 @@ when the canonical Trial report is unavailable.
 
 Trial is read-only with respect to your source tree. The public wrapper writes
 only under `.clarion-trial/`.
+
+For the full governed agent loop that Trial is meant to unlock, see
+[agent-automation-path.md](agent-automation-path.md).

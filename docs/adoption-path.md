@@ -51,7 +51,7 @@ smoothest adoption:
 | **PR** | A diff (uncommitted changes or branch comparison) | Governance verdict on proposed changes |
 | **Bug** | A test directory + a failing test or bug title | Scoped repair with governance boundaries |
 | **Arch** | `ARCHITECTURE.md` or `docs/architecture*` | Boundary mapping and violation detection |
-| **Agent** | Explicit configuration + stable PR lane | Scheduler-controlled AI under governance |
+| **Agent** | Explicit configuration + stable PR lane + trusted CI verdicts | Automated edits inside a governed change loop |
 
 ## Recommended adoption sequence
 
@@ -61,14 +61,14 @@ Week 2:  Add AGENTS.md → run trial pr on a real diff → see governance previe
 Week 3:  Add CI workflow with clarion check → automated PR gate
 Week 4+: Add test directory → enable bug lane
          Add ARCHITECTURE.md → enable arch lane
-         Configure agent scheduler → enable agent lane
+         Add explicit task scoping + governed agent execution → enable agent lane
 ```
 
 ## What NOT to do
 
 - Do not try to enable all lanes at once
 - Do not add `ARCHITECTURE.md` before PR governance is stable
-- Do not enable agent scheduler before you trust PR verdicts
+- Do not enable automated agents before you trust PR verdicts
 - Do not treat partial/unavailable as failure — it is honest status
 
 ## From demo to production
@@ -81,3 +81,5 @@ Week 4+: Add test directory → enable bug lane
 | `demo-trial-empty-repo.sh` | First-time `clarion trial doctor` |
 
 The demo scripts are wrappers. The production path uses the Clarion CLI directly.
+
+For the governed agent lane, see [agent-automation-path.md](agent-automation-path.md).

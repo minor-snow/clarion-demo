@@ -40,6 +40,10 @@ Then evaluate:
 4. If bug lane ran, was the scope honest about missing signals?
 5. Did the bridge report (or canonical report) give a clear next step?
 
+If PR guidance is stable on a repo, use that as the signal that the governed
+agent lane may be ready for evaluation next. Do not score agent automation
+readiness before the PR lane is trustworthy.
+
 Score each dimension: `ok` / `issue` / `n/a`
 
 ## Completion criteria

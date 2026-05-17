@@ -8,6 +8,7 @@ This repository is the first thing a prospective Clarion user encounters. It ser
 2. **A bridge to trial** — Guides users from "see it work" to "try it on my code"
 3. **A contract reference** — Documents the public CLI surface and stability guarantees
 4. **An evidence index** — Curates conformance and safety documentation
+5. **An automation adoption guide** — Explains when a governed agent lane becomes trustworthy
 
 ## Design principles
 

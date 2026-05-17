@@ -45,6 +45,9 @@ The wrapper uses `.clarion-trial/` inside the target repository:
 If the canonical report is unavailable, the wrapper prints that explicitly and
 writes a bridge report instead. The bridge report is not a Clarion Trial report.
 
+Once your PR lane is stable, see [docs/agent-automation-path.md](docs/agent-automation-path.md)
+for the recommended path toward governed agent automation.
+
 ## Examples
 
 ### Python project

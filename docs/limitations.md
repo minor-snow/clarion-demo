@@ -10,7 +10,7 @@
 
 4. **No CI integration demo** — The demo runs locally. CI integration is documented but not demonstrated end-to-end.
 
-5. **No agent interaction** — The demo applies a patch manually. It does not show an actual AI agent being governed in real-time.
+5. **No public runtime agent demo yet** — The repo documents the governed agent flow, but the public demo scripts still stop short of a real end-to-end coding-agent runtime.
 
 ## Trial limitations
 

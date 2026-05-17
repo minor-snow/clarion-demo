@@ -11,6 +11,7 @@ enforcement type and the evidence that verifies it.
 | No absolute local paths in shared artifacts | artifact safety | `assert-output-safe.js` | verified |
 | No raw diff hunks in human-facing docs | artifact safety | `assert-output-safe.js` | verified |
 | No secret-like payloads in public docs | artifact safety | `assert-output-safe.js` | verified |
+| Automated agent changes must still hit governance verdicts | documented adoption flow | `agent-automation-path.md` + trust-bite / review-required evidence | documented |
 | Local-only binding | behavior constraint | `AGENTS.md` + app design | advisory |
 | Type discipline (no `any`) | static discipline | project type checks | project-specific |
 

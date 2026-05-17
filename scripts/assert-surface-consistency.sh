@@ -58,7 +58,7 @@ echo ""
 # --- 3. No requires_review in public docs (actual verdict is requires_contract) ---
 echo "3. Checking for incorrect verdict terminology..."
 WRONG_VERDICT=$(grep -rn "requires_review" "$REPO_ROOT" \
-  --include="*.md" --include="*.sh" \
+  --include="*.md" --include="*.sh" --include="*.yml" --include="*.yaml" --include="*.json" \
   2>/dev/null | grep -vE "$EXCLUDE_DIRS|assert-surface-consistency" || true)
 
 if [ -n "$WRONG_VERDICT" ]; then
