@@ -72,3 +72,53 @@ jobs:
         run: |
           cd fixtures/trust-bite-app
           python3 tests/test_policy_engine.py
+
+  runtime-public-entrypoints:
+    name: Runtime public entrypoints
+    runs-on: ubuntu-latest
+    if: ${{ vars.CLARION_ENGINE_AVAILABLE == 'true' }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Download Clarion binary
+        env:
+          CLARION_DOWNLOAD_URL: ${{ vars.CLARION_DOWNLOAD_URL }}
+        run: |
+          if [ -z "$CLARION_DOWNLOAD_URL" ]; then
+            echo "ERROR: CLARION_DOWNLOAD_URL not set"
+            exit 1
+          fi
+          curl -fsSL "$CLARION_DOWNLOAD_URL" -o /usr/local/bin/clarion
+          chmod +x /usr/local/bin/clarion
+
+      - name: Run review-required demo
+        env:
+          CLARION_BIN: /usr/local/bin/clarion
+        run: bash scripts/demo-review-required.sh
+
+      - name: Verify review-required artifacts
+        run: |
+          test -f artifacts/review-required/result.json
+          test -f artifacts/review-required/review-required-report.md
+          node scripts/assert-output-safe.js artifacts/review-required/review-required-report.md
+
+      - name: Run trial on minimal repo
+        env:
+          CLARION_BIN: /usr/local/bin/clarion
+        run: bash scripts/demo-trial-empty-repo.sh
+
+      - name: Verify minimal-repo artifacts
+        run: |
+          test -f artifacts/trial-empty-repo/empty-repo-summary.md
+          test -f artifacts/trial-empty-repo/run.log
+          if [ ! -f artifacts/trial-empty-repo/report/clarion_trial_report.md ] && [ ! -f artifacts/trial-empty-repo/bridge_report.md ]; then
+            echo "ERROR: neither canonical nor bridge report was produced"
+            exit 1
+          fi
+          node scripts/assert-output-safe.js artifacts/trial-empty-repo/empty-repo-summary.md

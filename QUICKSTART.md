@@ -29,6 +29,13 @@ cd clarion-demo
 - A sanitized report was generated at `artifacts/bite/bite-report.md`
 - A machine-readable envelope was generated at `artifacts/bite/result.json`
 
+## Expected output
+
+- `clarion check` returns a non-zero exit code inside the demo
+- `artifacts/bite/result.json` contains the machine-readable CLI envelope
+- `artifacts/bite/bite-report.md` contains the sanitized human summary
+- The verdict is not `pass` and is typically `requires_contract` for this fixture
+
 ## What happened
 
 The demo applies a patch to a file marked as protected in `pantheon.json` and

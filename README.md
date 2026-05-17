@@ -9,11 +9,13 @@ This repository is the public front door for trying Clarion.
 ### 1. See Clarion enforce a rule
 
 ```bash
-./scripts/demo-bite.sh              # protected → non-pass
-./scripts/demo-review-required.sh   # review_required → requires_contract
+./scripts/demo-bite.sh              # protected -> non-pass
+./scripts/demo-review-required.sh   # review_required -> governance state
 ```
 
-Expected takeaway: Clarion produces a real non-pass result when a protected surface changes, and flags review-required surfaces for governance review.
+Expected takeaway: Clarion produces a real non-pass result when a protected
+surface changes, and surfaces governance attention when a review-required path
+changes.
 
 ### 1b. See Trial on a bare repo (honest first-encounter)
 
@@ -21,7 +23,10 @@ Expected takeaway: Clarion produces a real non-pass result when a protected surf
 ./scripts/demo-trial-empty-repo.sh
 ```
 
-Expected takeaway: Most repos don't have governance surfaces on day one. This demo shows the realistic Trial output for a repo with no ARCHITECTURE.md, no AGENTS.md, no CI, no tests. The point is not the happy path — it is the path most users will actually see first.
+Expected takeaway: Most repos do not have governance surfaces on day one. This
+demo shows the realistic Trial output for a repo with no `ARCHITECTURE.md`, no
+`AGENTS.md`, no CI, and no tests. The point is not the happy path; it is the
+path most users will actually see first.
 
 ### 2. Try Clarion on your own repo
 
@@ -29,7 +34,8 @@ Expected takeaway: Most repos don't have governance surfaces on day one. This de
 ./scripts/trial-on-repo.sh /path/to/your/repo
 ```
 
-Expected takeaway: Clarion tells you which governance lanes are useful in your repository today.
+Expected takeaway: Clarion tells you which governance lanes are useful in your
+repository today.
 
 This writes either:
 - `.clarion-trial/report/clarion_trial_report.md` when the canonical Trial report is produced
@@ -51,7 +57,8 @@ Read:
 - [docs/conformance-evidence.md](docs/conformance-evidence.md)
 - [docs/safety-boundaries.md](docs/safety-boundaries.md)
 
-Expected takeaway: Clarion's external output is structured, sanitized, and does not require reading private stores.
+Expected takeaway: Clarion's external output is structured, sanitized, and does
+not require reading private stores.
 
 ---
 
@@ -59,8 +66,8 @@ Expected takeaway: Clarion's external output is structured, sanitized, and does 
 
 | Governance rule | Human-visible effect | Machine evidence |
 |---|---|---|
-| Protected files cannot be silently changed | Agent avoids / flags core policy edits | `demo-bite.sh` returns non-pass |
-| Review-required files need human attention | Agent warns before modifying core surfaces | `demo-review-required.sh` reports governance state |
+| Protected files cannot be silently changed | Agent avoids or flags core policy edits | `demo-bite.sh` returns non-pass |
+| Review-required files need human attention | Change is surfaced for governance review | `demo-review-required.sh` reports governance state |
 | No raw output in shareable reports | Reports contain only sanitized summaries | `assert-output-safe.js` passes |
 | No absolute paths in public artifacts | Local paths never leak into shared docs | `assert-output-safe.js` passes |
 
